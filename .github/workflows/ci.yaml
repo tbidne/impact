@@ -28,7 +28,7 @@ jobs:
       - name: Build
         run: |
           nix build
-          if [ -f "./result/share/fonts/truetype/impact.TTF" ]; then
+          if [ -f "./result/share/fonts/truetype/impact.ttf" ]; then
             echo "Build succeeded"
           else
             echo "Build failed"
