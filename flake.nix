@@ -2,18 +2,22 @@
   description = "Impact Font";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
     flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
+  outputs = { flake-compat, flake-utils, nixpkgs, self }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
         version = "1.0.0";
       in
       {
-        defaultPackage = with pkgs; stdenv.mkDerivation {
+        packages.default = with pkgs; stdenv.mkDerivation {
           name = "impact-${version}";
           src = ./.;
           buildInputs = [ unzip ];
