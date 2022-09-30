@@ -1,4 +1,4 @@
-name: flakes
+name: ci
 
 on:
   push:
