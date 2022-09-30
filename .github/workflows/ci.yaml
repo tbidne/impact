@@ -22,6 +22,9 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
+      - name: Style
+        run: nix run github:tbidne/nix-hs-tools/0.6.1#nixpkgs-fmt -- --check
+
       - name: Build
         run: |
           nix build
